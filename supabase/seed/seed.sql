@@ -71,8 +71,15 @@ begin
       jsonb_build_object('sub', user_id::text, 'email', email_address),
       'email', now(), now(), now()
     ) on conflict (provider_id, provider) do nothing;
-    insert into public.profiles (id, university_id, display_name, class_year, bio, verified_at)
-    values (user_id, university_id, first_names[i] || ' ' || last_names[i], 2013 + (i % 4), 'Mizzou rodie. Here for what is happening now.', now())
+    insert into public.profiles (
+      id, university_id, display_name, class_year, bio, rodie_since,
+      likes_collected, connection_count, verified_at
+    )
+    values (
+      user_id, university_id, first_names[i] || ' ' || last_names[i], 2013 + (i % 4),
+      'Mizzou rodie. Here for what is happening now.', current_date - (120 + i * 11),
+      840 + i * 173, 34 + i * 9, now()
+    )
     on conflict (id) do nothing;
   end loop;
 

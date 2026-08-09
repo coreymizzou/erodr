@@ -101,7 +101,7 @@ export default function ComposeScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>VISIBLE TO</Text>
           <View style={styles.audienceRow}>
-            <Text style={styles.audience}>Classmates</Text>
+            <Text style={styles.audience}>Mizzou Streamer</Text>
             <Text style={styles.audienceMeta}>Mizzou · within 5 miles</Text>
           </View>
         </View>
@@ -128,7 +128,7 @@ export default function ComposeScreen() {
 
 const styles = StyleSheet.create({
   screen: { backgroundColor: erodrTheme.colors.selectorBackground, flex: 1 },
-  postButton: { color: '#FFFFFF', fontFamily: erodrTheme.type.family, fontSize: 17 },
+  postButton: { color: erodrTheme.colors.historicalGreen, fontFamily: erodrTheme.type.family, fontSize: 17 },
   disabled: { opacity: 0.45 },
   composer: {
     backgroundColor: '#FFFFFF',

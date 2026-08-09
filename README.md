@@ -1,6 +1,6 @@
 # Erodr Restoration Prototype
 
-This repository reconstructs the historical Erodr college social network for private product research. It is a restoration baseline, not a redesign. The main visual reference is an attributed 2017 App Store screenshot; the historical behavior model also uses contemporaneous 2013–2014 product descriptions.
+This repository reconstructs the historical Erodr college social network for private product research. It is a restoration baseline, not a redesign. The primary visual specification is now a set of firsthand 2013–2015 iPhone captures and original marks supplied by a former user; later screenshots and contemporaneous product descriptions provide supporting evidence.
 
 The app opens in a zero-configuration demo mode with a populated Mizzou community. Supabase migrations and seed SQL provide the production-shaped backend path without making local exploration depend on external infrastructure.
 
@@ -79,4 +79,4 @@ Start with:
 - `docs/MISSING_ASSETS.md`
 - `docs/RECONSTRUCTION_NOTES.md`
 
-No original project assets were present when work began. The three bundled campus images are clearly labeled generated demo media. The lowercase splash/login wordmark is live-text placeholder treatment, not claimed original artwork.
+The supplied original app icon and radar mark are preserved under `apps/mobile/assets/erodr/original/`. The three bundled campus scenes remain clearly labeled generated demo media. Full screenshots with personal photographs remain reference-only under `reference/user-supplied/`.

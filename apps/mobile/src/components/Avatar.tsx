@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { erodrTheme } from '@/theme/erodrTheme';
@@ -13,9 +14,11 @@ export function Avatar({ profile, anonymous = false, size = erodrTheme.metrics.a
   const backgroundColor = anonymous ? '#B7B7B7' : profile?.avatarColor ?? '#777777';
   return (
     <View style={[styles.avatar, { width: size, height: size, borderRadius: size / 2, backgroundColor }]}>
-      <Text style={[styles.initials, { fontSize: Math.round(size * 0.34) }]}>
-        {anonymous ? '?' : profile?.initials ?? 'R'}
-      </Text>
+      {anonymous ? (
+        <Ionicons color="#202020" name="person" size={Math.round(size * 0.62)} />
+      ) : (
+        <Text style={[styles.initials, { fontSize: Math.round(size * 0.34) }]}>{profile?.initials ?? 'R'}</Text>
+      )}
     </View>
   );
 }

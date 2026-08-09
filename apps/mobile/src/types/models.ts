@@ -19,6 +19,10 @@ export interface PublicProfile {
   classYear: number;
   bio: string;
   avatarColor: string;
+  rodieSince: string;
+  likesCollected: number;
+  connectionCount: number;
+  validated: boolean;
 }
 
 export interface StoredPost {

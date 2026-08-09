@@ -11,36 +11,43 @@ export default function TabLayout() {
         headerShown: false,
         tabBarActiveTintColor: erodrTheme.colors.selectedTabCyan,
         tabBarInactiveTintColor: erodrTheme.colors.inactiveTab,
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
+        tabBarLabelStyle: { fontFamily: erodrTheme.type.family, fontSize: 12, marginTop: -3 },
         tabBarStyle: {
           backgroundColor: erodrTheme.colors.surface,
-          borderTopColor: erodrTheme.colors.surface,
+          borderTopColor: '#B8B8B8',
           height: erodrTheme.metrics.tabBarHeight,
-          paddingBottom: 5,
-          paddingTop: 6,
+          paddingBottom: 3,
+          paddingTop: 4,
         },
       }}
     >
       <Tabs.Screen
         name="classmates"
-        options={{ tabBarAccessibilityLabel: 'Classmates', tabBarIcon: ({ color }) => <Ionicons color={color} name="power-outline" size={35} /> }}
+        options={{ title: 'Streamer', tabBarAccessibilityLabel: 'Streamer', tabBarIcon: ({ color }) => <Ionicons color={color} name="home" size={34} /> }}
       />
       <Tabs.Screen
-        name="inbox"
-        options={{ tabBarAccessibilityLabel: 'Responses', tabBarIcon: ({ color }) => <Ionicons color={color} name="chatbubbles-outline" size={34} /> }}
+        name="map"
+        options={{ title: 'Map', tabBarAccessibilityLabel: 'Map', tabBarIcon: ({ color }) => <Ionicons color={color} name="location" size={33} /> }}
       />
       <Tabs.Screen
         name="compose"
-        options={{ tabBarAccessibilityLabel: 'Post', tabBarIcon: ({ color }) => <Ionicons color={color} name="pencil-outline" size={35} /> }}
+        options={{ title: 'Post', tabBarAccessibilityLabel: 'Post', tabBarIcon: ({ color }) => <Ionicons color={color} name="create-outline" size={35} /> }}
       />
       <Tabs.Screen
-        name="alerts"
-        options={{ tabBarAccessibilityLabel: 'Alerts', tabBarIcon: ({ color }) => <Ionicons color={color} name="notifications-outline" size={35} /> }}
+        name="inbox"
+        options={{ title: 'Chat', tabBarAccessibilityLabel: 'Chat', tabBarIcon: ({ color }) => <Ionicons color={color} name="chatbubbles" size={34} /> }}
       />
       <Tabs.Screen
         name="profile"
-        options={{ tabBarAccessibilityLabel: 'Profile', tabBarIcon: ({ color }) => <Ionicons color={color} name="person-outline" size={36} /> }}
+        options={{
+          title: 'Profile',
+          tabBarAccessibilityLabel: 'Profile',
+          tabBarIcon: ({ color }) => <Ionicons color={color} name="person" size={35} />,
+          tabBarStyle: { display: 'none' },
+        }}
       />
+      <Tabs.Screen name="alerts" options={{ href: null }} />
     </Tabs>
   );
 }

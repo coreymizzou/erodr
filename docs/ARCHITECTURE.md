@@ -2,7 +2,7 @@
 
 ## App shape
 
-The mobile app is an Expo SDK 57 React Native/TypeScript application using Expo Router. The five-tab shell follows the only available historical screenshot: Classmates, Responses, Post, Notifications, and Profile. The Classmates header can also switch to the historically documented Anonymous Ticker and National Posts streams.
+The mobile app is an Expo SDK 57 React Native/TypeScript application using Expo Router. The primary five-tab shell follows the firsthand 2013–2015 captures: Streamer, Map, Post, Chat, and Profile. The graduation-cap control switches the local Mizzou Streamer to the historically documented Anonymous Ticker and National Posts streams.
 
 `ErodrStoreProvider` is the first-milestone offline adapter. It exposes the same sanitized model expected from Supabase, so the visual reconstruction remains immediately usable without infrastructure. TanStack Query is installed at the app boundary for the network adapter phase; local state handles optimistic first-milestone interaction without Redux.
 
@@ -48,7 +48,7 @@ Anonymous content never appears in public profile post lists. A private response
 
 `get_active_posts` uses database `now()`, not the client clock, and filters `expires_at > now()`. The offline adapter uses the same predicate only for demo behavior; it is not authoritative outside demo mode.
 
-Classmates restricts to a university. Anonymous Ticker requires anonymous posts with ticker audience. National Posts requires identified national-audience posts. Blocked authors are excluded inside the server-side feed function.
+The local Streamer (`classmates` in the database enum for compatibility) restricts to a university. Anonymous Ticker requires anonymous posts with ticker audience. National Posts requires identified national-audience posts. Blocked authors are excluded inside the server-side feed function.
 
 ## Voting and erosion
 
@@ -70,3 +70,5 @@ The local adapter updates vote counts and lifespan synchronously for immediate f
 The local TypeScript seed and SQL seed both provide 25 profiles, 60 posts, more than 100 public responses, votes, five universities, and Mizzou-dominant conversation. SQL IDs are deterministic so tests and research scripts can refer to stable rows.
 
 Generated demo media is intentionally separated under `apps/mobile/assets/erodr/demo/` and documented as non-historical.
+
+Supplied original Erodr logo/radar files are isolated under `apps/mobile/assets/erodr/original/`. User screenshots containing personal photographs remain reference-only and are never used as seeded profile or post media.

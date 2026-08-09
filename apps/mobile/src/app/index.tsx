@@ -1,8 +1,7 @@
 import { useRouter } from 'expo-router';
 import { useEffect } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-
-import { erodrTheme } from '@/theme/erodrTheme';
+import { Image } from 'expo-image';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
 export default function SplashScreen() {
   const router = useRouter();
@@ -13,11 +12,11 @@ export default function SplashScreen() {
 
   return (
     <Pressable onPress={() => router.replace('/login')} style={styles.screen}>
-      <View style={styles.mark}>
-        <Text style={styles.wordmark}>erodr</Text>
-        <View style={styles.rule} />
-        <Text style={styles.tagline}>what's happening now</Text>
-      </View>
+      <Image
+        contentFit="contain"
+        source={require('../../assets/erodr/original/erodr-radar.jpeg')}
+        style={styles.radar}
+      />
       <Text style={styles.note}>INTERNAL RESTORATION PROTOTYPE</Text>
     </Pressable>
   );
@@ -26,31 +25,14 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
   screen: {
     alignItems: 'center',
-    backgroundColor: erodrTheme.colors.headerGreen,
+    backgroundColor: '#000000',
     flex: 1,
     justifyContent: 'center',
   },
-  mark: { alignItems: 'center', marginTop: -30 },
-  wordmark: {
-    color: erodrTheme.colors.surface,
-    fontFamily: erodrTheme.type.family,
-    fontSize: 58,
-    fontWeight: '200',
-    letterSpacing: -2,
-  },
-  rule: { backgroundColor: erodrTheme.colors.cyan, height: 3, marginTop: 4, width: 118 },
-  tagline: {
-    color: '#D8F1DD',
-    fontFamily: erodrTheme.type.family,
-    fontSize: 14,
-    fontWeight: '300',
-    letterSpacing: 1,
-    marginTop: 9,
-  },
+  radar: { height: 310, marginTop: -28, width: 310 },
   note: {
     bottom: 28,
-    color: '#B9DCBF',
-    fontFamily: erodrTheme.type.family,
+    color: '#5B5B5B',
     fontSize: 9,
     letterSpacing: 1.4,
     position: 'absolute',

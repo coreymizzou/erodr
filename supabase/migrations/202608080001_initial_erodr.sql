@@ -23,6 +23,9 @@ create table public.profiles (
   avatar_url text,
   class_year integer check (class_year between 2000 and 2100),
   bio text not null default '' check (char_length(bio) <= 300),
+  rodie_since date not null default current_date,
+  likes_collected integer not null default 0 check (likes_collected >= 0),
+  connection_count integer not null default 0 check (connection_count >= 0),
   verified_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()

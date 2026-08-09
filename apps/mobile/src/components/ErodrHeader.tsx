@@ -18,7 +18,7 @@ export function ErodrHeader({ title, right, onBack }: ErodrHeaderProps) {
       <View style={styles.side}>
         {onBack ? (
           <Pressable accessibilityLabel="Back" hitSlop={12} onPress={onBack}>
-            <Ionicons color={erodrTheme.colors.surface} name="chevron-back" size={31} />
+            <Ionicons color={erodrTheme.colors.historicalGreen} name="chevron-back" size={31} />
           </Pressable>
         ) : null}
       </View>
@@ -31,7 +31,9 @@ export function ErodrHeader({ title, right, onBack }: ErodrHeaderProps) {
 const styles = StyleSheet.create({
   shell: {
     alignItems: 'center',
-    backgroundColor: erodrTheme.colors.headerGreen,
+    backgroundColor: erodrTheme.colors.surface,
+    borderBottomColor: '#D8D8D8',
+    borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
     paddingHorizontal: 15,
   },
@@ -42,11 +44,11 @@ const styles = StyleSheet.create({
   },
   right: { alignItems: 'flex-end' },
   title: {
-    color: erodrTheme.colors.surface,
+    color: erodrTheme.colors.black,
     flex: 1,
     fontFamily: erodrTheme.type.family,
     fontSize: erodrTheme.type.title,
-    fontWeight: '400',
+    fontWeight: '600',
     textAlign: 'center',
   },
 });
