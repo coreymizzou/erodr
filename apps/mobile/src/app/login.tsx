@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { Image } from 'expo-image';
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -14,6 +15,7 @@ export default function LoginScreen() {
     <SafeAreaView edges={['top', 'bottom']} style={styles.safe}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={styles.screen}>
         <View style={styles.brand}>
+          <Image contentFit="contain" source={require('../../assets/erodr/original/Erodr-logo.png')} style={styles.logo} />
           <Text style={styles.wordmark}>erodr</Text>
           <Text style={styles.welcome}>Your college. Right now.</Text>
         </View>
@@ -37,29 +39,30 @@ export default function LoginScreen() {
             <Text style={styles.demoSubtext}>No verification required</Text>
           </Pressable>
         </View>
-        <Text style={styles.footnote}>Validated rodies see Classmates and National posts.</Text>
+        <Text style={styles.footnote}>Validated rodies enter the Mizzou Streamer.</Text>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { backgroundColor: erodrTheme.colors.headerGreen, flex: 1 },
+  safe: { backgroundColor: '#FFFFFF', flex: 1 },
   screen: { backgroundColor: erodrTheme.colors.surface, flex: 1 },
   brand: {
     alignItems: 'center',
-    backgroundColor: erodrTheme.colors.headerGreen,
-    height: 245,
+    backgroundColor: '#F4F3EF',
+    height: 260,
     justifyContent: 'center',
   },
+  logo: { height: 112, width: 122 },
   wordmark: {
-    color: erodrTheme.colors.surface,
+    color: '#333333',
     fontFamily: erodrTheme.type.family,
-    fontSize: 54,
+    fontSize: 43,
     fontWeight: '200',
   },
   welcome: {
-    color: '#D9F0DE',
+    color: '#777777',
     fontFamily: erodrTheme.type.family,
     fontSize: 16,
     fontWeight: '300',
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
   },
   primary: {
     alignItems: 'center',
-    backgroundColor: erodrTheme.colors.cyan,
+    backgroundColor: erodrTheme.colors.historicalGreen,
     height: 49,
     justifyContent: 'center',
     marginTop: 13,

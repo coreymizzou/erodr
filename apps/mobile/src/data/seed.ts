@@ -85,6 +85,10 @@ export const profiles: PublicProfile[] = firstNames.map((firstName, index) => {
       ? 'Journalism. Coffee. Always somewhere near the Quad.'
       : ['Trying to survive group projects.', 'Ask me where the good study spots are.', 'Mizzou made.'][index % 3] ?? '',
     avatarColor: avatarColors[index % avatarColors.length] ?? '#5E7D8A',
+    rodieSince: new Date(2013, index % 12, 1).toISOString(),
+    likesCollected: 1200 + ((index * 613) % 5200),
+    connectionCount: 45 + ((index * 37) % 280),
+    validated: index % 5 !== 3,
   };
 });
 

@@ -1,4 +1,3 @@
-import { formatRemaining, remainingFraction } from '@erodr/domain';
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
@@ -16,80 +15,63 @@ interface PostCardProps {
 
 function ageLabel(createdAt: string): string {
   const minutes = Math.max(1, Math.floor((Date.now() - new Date(createdAt).getTime()) / 60_000));
-  if (minutes < 60) return `${minutes} min ago`;
+  if (minutes < 60) return `${minutes}m ago`;
   const hours = Math.floor(minutes / 60);
-  return hours < 24 ? `${hours} hr ago` : `${Math.floor(hours / 24)} d ago`;
+  return hours < 24 ? `${hours}h ago` : `${Math.floor(hours / 24)}d ago`;
 }
 
 export function PostCard({ post, detail = false }: PostCardProps) {
   const router = useRouter();
   const { vote } = useErodrStore();
-  const authorLabel = post.anonymous ? 'Anonymous' : post.author.displayName;
-  const location = post.anonymous
-    ? `${post.anonymousGender ?? 'Student'} · ${post.university.shortName}`
-    : `${post.university.shortName}. ${post.university.city}, ${post.university.state} (USA)`;
-  const life = remainingFraction(new Date(post.createdAt), new Date(post.expiresAt), new Date());
-  const erodedOpacity = 0.72 + life * 0.28;
-
+  const score = post.positiveCount - post.negativeCount;
+  const authorLabel = post.anonymous
+    ? `Anonymous ${post.anonymousGender === 'Woman' ? 'Female' : post.anonymousGender === 'Man' ? 'Male' : 'Rodie'}`
+    : post.author.displayName;
+  const location = post.anonymous ? 'Some place...' : `${post.university.city}, ${post.university.state}`;
   const openDetail = () => router.push({ pathname: '/post/[id]', params: { id: post.id } });
 
   return (
-    <View style={[styles.card, { opacity: erodedOpacity }]}>
+    <View style={styles.card}>
       <View style={styles.headerRow}>
         <Pressable
           disabled={post.anonymous}
           onPress={() => !post.anonymous && router.push({ pathname: '/profile/[id]', params: { id: post.author.id } })}
         >
-          <Avatar anonymous={post.anonymous} profile={post.anonymous ? undefined : post.author} />
+          <Avatar anonymous={post.anonymous} profile={post.anonymous ? undefined : post.author} size={52} />
         </Pressable>
         <View style={styles.identity}>
           <Text numberOfLines={1} style={styles.author}>{authorLabel}</Text>
-          <Text numberOfLines={1} style={styles.location}>{location}</Text>
+          <Text numberOfLines={1} style={styles.school}>{post.university.shortName}</Text>
         </View>
         <View style={styles.timeBlock}>
-          <Text style={styles.age}>{ageLabel(post.createdAt)}</Text>
-          <View style={styles.lifeRow}>
-            <Ionicons color={erodrTheme.colors.action} name="time-outline" size={14} />
-            <Text style={styles.remaining}>{formatRemaining(post.expiresAt)} left</Text>
+          <Text numberOfLines={1} style={styles.location}>{location}</Text>
+          <View style={styles.ageRow}>
+            <Ionicons color={erodrTheme.colors.action} name="time-outline" size={18} />
+            <Text style={styles.age}>{ageLabel(post.createdAt)}</Text>
           </View>
         </View>
+        <View style={styles.notch} />
       </View>
 
-      <Pressable disabled={detail} onPress={openDetail}>
-        <Text style={styles.body}>{post.body}</Text>
-        {post.imageSource ? (
-          <Image contentFit="cover" source={post.imageSource} style={styles.photo} transition={120} />
-        ) : null}
+      <Pressable disabled={detail} onPress={openDetail} style={styles.content}>
+        {post.imageSource ? <Image contentFit="cover" source={post.imageSource} style={styles.photo} transition={100} /> : null}
+        <View style={styles.bodyShell}>
+          {score >= 35 ? <Ionicons color="#D09A19" name="trophy-outline" size={32} style={styles.trophy} /> : null}
+          <Text style={styles.body}>{post.body}</Text>
+        </View>
       </Pressable>
 
-      <View style={styles.lifeTrack}>
-        <View style={[styles.lifeFill, { width: `${Math.max(2, life * 100)}%` }]} />
-      </View>
-
       <View style={styles.actions}>
+        <Text style={styles.score}>{score}</Text>
         <Pressable accessibilityLabel="Positive vote" hitSlop={8} onPress={() => vote(post.id, 1)} style={styles.voteButton}>
-          <Ionicons
-            color={post.myVote === 1 ? erodrTheme.colors.cyan : erodrTheme.colors.action}
-            name="chevron-up"
-            size={34}
-          />
-          <Text style={[styles.voteCount, post.myVote === 1 && styles.selectedAction]}>{post.positiveCount}</Text>
+          <Ionicons color={post.myVote === 1 ? erodrTheme.colors.historicalGreen : erodrTheme.colors.action} name="chevron-up" size={38} />
         </Pressable>
         <Pressable accessibilityLabel="Negative vote" hitSlop={8} onPress={() => vote(post.id, -1)} style={styles.voteButton}>
-          <Ionicons
-            color={post.myVote === -1 ? erodrTheme.colors.destructive : erodrTheme.colors.action}
-            name="chevron-down"
-            size={34}
-          />
-          <Text style={[styles.voteCount, post.myVote === -1 && styles.negativeAction]}>{post.negativeCount}</Text>
-        </Pressable>
-        <Pressable accessibilityLabel="Flag post" hitSlop={8} style={styles.iconOnly}>
-          <Ionicons color={erodrTheme.colors.action} name="flag" size={26} />
+          <Ionicons color={post.myVote === -1 ? erodrTheme.colors.destructive : erodrTheme.colors.action} name="chevron-down" size={38} />
         </Pressable>
         <Pressable accessibilityLabel="Open comments" onPress={openDetail} style={styles.comments}>
-          <Text style={styles.commentsLabel}>Comments</Text>
-          <Ionicons color={erodrTheme.colors.action} name="chatbubble" size={28} />
           <Text style={styles.commentCount}>{post.responseCount}</Text>
+          <Ionicons color={erodrTheme.colors.action} name="chatbubble" size={32} />
         </Pressable>
       </View>
     </View>
@@ -99,84 +81,51 @@ export function PostCard({ post, detail = false }: PostCardProps) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: erodrTheme.colors.surface,
-    marginBottom: 8,
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.12,
-    shadowRadius: 4,
+    borderColor: erodrTheme.colors.historicalGreen,
+    borderRadius: 6,
+    borderWidth: StyleSheet.hairlineWidth,
+    marginBottom: 13,
+    marginHorizontal: 9,
+    overflow: 'hidden',
   },
   headerRow: {
-    flexDirection: 'row',
-    paddingHorizontal: 12,
-    paddingTop: 14,
-  },
-  identity: { flex: 1, justifyContent: 'center', paddingLeft: 10, paddingRight: 5 },
-  author: {
-    color: erodrTheme.colors.author,
-    fontFamily: erodrTheme.type.family,
-    fontSize: erodrTheme.type.author,
-    fontWeight: '400',
-  },
-  location: {
-    color: erodrTheme.colors.secondaryText,
-    fontFamily: erodrTheme.type.family,
-    fontSize: erodrTheme.type.metadata,
-    fontWeight: '300',
-    marginTop: 3,
-  },
-  timeBlock: { alignItems: 'flex-end', paddingTop: 2 },
-  age: {
-    color: '#A0A0A0',
-    fontFamily: erodrTheme.type.family,
-    fontSize: erodrTheme.type.metadata,
-    fontWeight: '300',
-  },
-  lifeRow: { alignItems: 'center', flexDirection: 'row', gap: 3, marginTop: 5 },
-  remaining: {
-    color: erodrTheme.colors.action,
-    fontFamily: erodrTheme.type.family,
-    fontSize: 11,
-  },
-  body: {
-    color: erodrTheme.colors.text,
-    fontFamily: erodrTheme.type.family,
-    fontSize: erodrTheme.type.body,
-    fontWeight: '400',
-    lineHeight: 24,
-    paddingBottom: 16,
-    paddingHorizontal: 12,
-    paddingTop: 18,
-  },
-  photo: { aspectRatio: 1.08, width: '100%' },
-  lifeTrack: { backgroundColor: '#F0F0F0', height: 2 },
-  lifeFill: { backgroundColor: erodrTheme.colors.cyan, height: 2 },
-  actions: {
     alignItems: 'center',
+    borderBottomColor: '#111111',
+    borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
-    height: erodrTheme.metrics.actionRowHeight,
-    paddingHorizontal: 12,
+    minHeight: 75,
+    paddingHorizontal: 11,
+    paddingVertical: 8,
+    zIndex: 2,
   },
-  voteButton: { alignItems: 'center', flexDirection: 'row', marginRight: 10 },
-  voteCount: {
-    color: erodrTheme.colors.action,
-    fontFamily: erodrTheme.type.family,
-    fontSize: 13,
-    marginLeft: -3,
+  identity: { flex: 1, paddingLeft: 12, paddingRight: 5 },
+  author: { color: erodrTheme.colors.author, fontFamily: erodrTheme.type.family, fontSize: 19, fontWeight: '700' },
+  school: { color: erodrTheme.colors.secondaryText, fontFamily: erodrTheme.type.family, fontSize: 17, marginTop: 1 },
+  timeBlock: { alignItems: 'flex-end', maxWidth: 112 },
+  location: { color: erodrTheme.colors.secondaryText, fontFamily: erodrTheme.type.family, fontSize: 16 },
+  ageRow: { alignItems: 'center', flexDirection: 'row', gap: 3, marginTop: 2 },
+  age: { color: erodrTheme.colors.secondaryText, fontFamily: erodrTheme.type.family, fontSize: 16 },
+  notch: {
+    backgroundColor: '#FFFFFF',
+    borderBottomColor: '#111111',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderRightColor: '#111111',
+    borderRightWidth: StyleSheet.hairlineWidth,
+    bottom: -9,
+    height: 18,
+    left: 137,
+    position: 'absolute',
+    transform: [{ rotate: '45deg' }],
+    width: 18,
   },
-  selectedAction: { color: erodrTheme.colors.cyan },
-  negativeAction: { color: erodrTheme.colors.destructive },
-  iconOnly: { marginLeft: 2, paddingHorizontal: 7 },
-  comments: { alignItems: 'center', flexDirection: 'row', gap: 8, marginLeft: 'auto' },
-  commentsLabel: {
-    color: erodrTheme.colors.action,
-    fontFamily: erodrTheme.type.family,
-    fontSize: erodrTheme.type.action,
-    fontWeight: '300',
-  },
-  commentCount: {
-    color: erodrTheme.colors.action,
-    fontFamily: erodrTheme.type.family,
-    fontSize: 18,
-    fontWeight: '300',
-  },
+  content: { backgroundColor: '#FFFFFF' },
+  photo: { aspectRatio: 1.08, borderBottomColor: '#111111', borderBottomWidth: StyleSheet.hairlineWidth, width: '100%' },
+  bodyShell: { minHeight: 100, paddingHorizontal: 23, paddingVertical: 27 },
+  body: { color: erodrTheme.colors.text, fontFamily: erodrTheme.type.family, fontSize: 20, fontWeight: '400', lineHeight: 27 },
+  trophy: { position: 'absolute', right: 21, top: 11 },
+  actions: { alignItems: 'center', flexDirection: 'row', height: erodrTheme.metrics.actionRowHeight, paddingHorizontal: 24 },
+  score: { color: '#3B3B3B', fontFamily: erodrTheme.type.family, fontSize: 22, fontWeight: '700', minWidth: 66 },
+  voteButton: { alignItems: 'center', justifyContent: 'center', marginRight: 20 },
+  comments: { alignItems: 'center', flexDirection: 'row', gap: 17, marginLeft: 'auto' },
+  commentCount: { color: '#3B3B3B', fontFamily: erodrTheme.type.family, fontSize: 17, fontWeight: '700' },
 });

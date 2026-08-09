@@ -41,28 +41,24 @@ export function FeedSelector({ value, onChange }: FeedSelectorProps) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: erodrTheme.colors.selectorBackground,
-    paddingHorizontal: 7,
-    paddingVertical: 10,
+    borderBottomColor: '#AFAFAF',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   control: {
-    borderColor: erodrTheme.colors.cyan,
-    borderRadius: 7,
-    borderWidth: 1.5,
     flexDirection: 'row',
-    height: 39,
-    overflow: 'hidden',
+    height: 49,
   },
   segment: {
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
   },
-  selected: { backgroundColor: erodrTheme.colors.cyan },
+  selected: { backgroundColor: erodrTheme.colors.surface },
   label: {
-    color: erodrTheme.colors.cyan,
+    color: erodrTheme.colors.black,
     fontFamily: erodrTheme.type.family,
     fontSize: erodrTheme.type.segment,
-    fontWeight: '300',
+    fontWeight: '400',
   },
-  selectedLabel: { color: erodrTheme.colors.surface, fontWeight: '400' },
+  selectedLabel: { color: erodrTheme.colors.historicalGreen, fontWeight: '400' },
 });

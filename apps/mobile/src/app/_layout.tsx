@@ -16,7 +16,7 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <ErodrStoreProvider>
-          <StatusBar style="light" />
+          <StatusBar style="dark" />
           <Stack screenOptions={{ headerShown: false, animation: 'slide_from_right' }} />
         </ErodrStoreProvider>
       </QueryClientProvider>

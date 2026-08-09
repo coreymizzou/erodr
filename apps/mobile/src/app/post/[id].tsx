@@ -49,7 +49,7 @@ export default function PostDetailScreen() {
         onBack={() => router.back()}
         right={post.anonymous ? (
           <Pressable accessibilityLabel="Private response">
-            <Ionicons color="#FFFFFF" name="lock-closed-outline" size={25} />
+            <Ionicons color={erodrTheme.colors.historicalGreen} name="lock-closed-outline" size={25} />
           </Pressable>
         ) : undefined}
         title="Comments"

@@ -2,32 +2,32 @@
 
 ## Evidence policy
 
-The workspace contained no supplied references. The implementation therefore uses three confidence labels:
+The reconstruction uses three confidence labels:
 
-- **Observed:** directly visible in `reference/external/erodr-app-store-2017.png`.
+- **Observed:** directly visible in the firsthand files under `reference/user-supplied/` or the later screenshot under `reference/external/`.
 - **Documented:** described by contemporaneous Erodr/company coverage.
 - **Approximation:** required for a functioning prototype but not established by available evidence.
 
-UI constants include comments indicating which values were pixel-sampled and which are inferred. Original assets will replace placeholders without changing feature architecture.
+UI constants include comments indicating which values were pixel-sampled and which are inferred. Supplied original assets are preserved byte-for-byte and used where applicable.
 
 ## Era selection
 
-The only visual artifact is from 2017, while the strongest behavioral descriptions are from 2013–2014. The first milestone uses the 2017 Classmates feed shell and preserves earlier historically documented behaviors (Streamer proximity, Anonymous Ticker, private responses, user-set lifespan). This is a composite restoration baseline, not proof that every control coexisted in one release.
+The target era is now the firsthand iPhone 5/5s interface visible in the user-supplied screenshots, broadly 2013–2015. Its white `erodr` header, green-outline Streamer cards, labeled Streamer/Map/Post/Chat/Profile tabs, and period profile treatment supersede the later 2017 green/cyan Classmates shell. The 2017 screenshot remains useful evidence for later evolution but is no longer the primary visual target.
 
 ## Major approximations
 
 1. **Erosion formula.** No exact formula was found. The prototype uses the requested fallback: six-hour base life, +5 minutes per positive vote, −10 minutes per negative vote, 72-hour cap, and five-minute minimum immediately following a vote. All constants are centralized.
-2. **Visual erosion.** Remaining-life tint/opacity is subtle and confined to a slim time rail/clock treatment so it does not introduce a game-like metaphor absent from the screenshot.
-3. **Bottom navigation.** Observed silhouettes are mapped to Classmates, Responses, Compose, Alerts, and Profile. Labels remain hidden, matching the screenshot.
-4. **Anonymous identity.** Anonymous posts display `Anonymous` plus gender only when seeded/provided. Client-facing post types omit author identifiers and profile joins for anonymous rows.
+2. **Visual erosion.** The firsthand cards show a clock/age but do not prove a remaining-life meter. The prototype communicates erosion through age and feed expiration without adding a game-like rail.
+3. **Bottom navigation.** Streamer, Map, Post, Chat, and Profile labels and silhouettes follow `1NFJTtrL.png`; icon shapes are the closest bundled Ionicons until original glyphs are supplied.
+4. **Anonymous identity.** Anonymous posts display `Anonymous Male` or `Anonymous Female` when seeded/provided. Client-facing post types omit author identifiers and profile joins for anonymous rows.
 5. **Location.** Demo coordinates are centered on Mizzou and “Nearest” uses simulated distances. Schema supports latitude, longitude, and radius.
-6. **Login/splash/composer/profile.** These are built with observed green/cyan/gray, square geometry, dense dividers, and period iOS typography, but layouts remain inferred until original captures are supplied.
+6. **Login/splash/composer.** Login and composer remain period-compatible inferences. Splash uses the supplied radar asset. Profile now follows two supplied captures closely.
 7. **Expiration retention.** Rows remain in the prototype database for administrative research but active views/RPCs exclude `expires_at <= now()` using database time.
 
 ## First-milestone implementation plan
 
 1. Establish a strict TypeScript Expo Router workspace and shared erosion domain package.
-2. Recreate the observed Classmates shell and feed density with reusable historical components.
+2. Recreate the observed Streamer shell and feed density with reusable historical components.
 3. Add deterministic local demo data so the app opens fully populated without Supabase credentials.
 4. Implement composer, anonymous/identified presentation, optimistic voting, expiration filtering, public responses, profiles, and private response routing.
 5. Add normalized Supabase schema, security-definer public feed projection, RLS, rich SQL seed generation, and setup docs.
@@ -35,7 +35,7 @@ The only visual artifact is from 2017, while the strongest behavioral descriptio
 
 ## Open evidence requests
 
-Highest-value additions are original splash/login captures, an uncompressed logo/app icon, composer screenshots, response/private-message screens, profile/gallery captures, and any documentation of the erosion formula.
+Highest-value additions are original splash/login captures, composer screenshots, response/private-message screens, original navigation/action glyphs, and any documentation of the erosion formula. The supplied logo/app icon and profile captures resolved major earlier gaps.
 
 ## Dependency advisory note
 

@@ -14,7 +14,7 @@ export default function InboxScreen() {
   const { conversations } = useErodrStore();
   return (
     <View style={styles.screen}>
-      <ErodrHeader title="Responses" />
+      <ErodrHeader title="Chat" />
       <FlatList
         data={conversations}
         keyExtractor={(item) => item.id}
