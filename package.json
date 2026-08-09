@@ -1,0 +1,20 @@
+{
+  "name": "erodr-reconstruction",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "npm --workspace @erodr/mobile run start",
+    "ios": "npm --workspace @erodr/mobile run ios",
+    "android": "npm --workspace @erodr/mobile run android",
+    "web": "npm --workspace @erodr/mobile run web",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
