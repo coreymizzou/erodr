@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "erodr",
+    "slug": "erodr-restored",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "erodr",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "internal.erodr.restored"
+    },
+    "android": {
+      "package": "internal.erodr.restored",
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#009933"
+        }
+      ],
+      "expo-image-picker"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
