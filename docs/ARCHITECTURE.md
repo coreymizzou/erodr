@@ -2,7 +2,7 @@
 
 ## App shape
 
-The mobile app is an Expo SDK 57 React Native/TypeScript application using Expo Router. The primary five-tab shell follows the firsthand 2013–2015 captures: Streamer, Map, Post, Chat, and Profile. The graduation-cap control switches the local Mizzou Streamer to the historically documented Anonymous Ticker and National Posts streams.
+The mobile app is an Expo SDK 54 React Native/TypeScript application using Expo Router. SDK 54 is intentionally pinned for compatibility with the current iPhone App Store build of Expo Go. The primary five-tab shell follows the firsthand 2013–2015 captures: Streamer, Map, Post, Chat, and Profile. The graduation-cap control switches the local Mizzou Streamer to the historically documented Anonymous Ticker and National Posts streams.
 
 `ErodrStoreProvider` is the first-milestone offline adapter. It exposes the same sanitized model expected from Supabase, so the visual reconstruction remains immediately usable without infrastructure. TanStack Query is installed at the app boundary for the network adapter phase; local state handles optimistic first-milestone interaction without Redux.
 

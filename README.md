@@ -28,6 +28,17 @@ npm run web
 
 On the login screen, choose **Demo Login · Mizzou**. Demo mode is intentionally local and deterministic; no credentials, `.edu` verification, or network connection are required.
 
+### Physical iPhone / Expo Go
+
+The project is pinned to Expo SDK 54 because that is the runtime supported by the current iPhone App Store build of Expo Go. After pulling dependency changes, stop any old Metro process and clear its cached SDK 57 manifest:
+
+```bash
+npm install
+npm start -- --clear
+```
+
+Scan the newly generated QR code from Expo Go. Do not reuse a QR code or terminal process that was started before the SDK change.
+
 ## Demo identity
 
 - User: Maya Jefferson
