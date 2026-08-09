@@ -33,11 +33,11 @@ On the login screen, choose **Demo Login · Mizzou**. Demo mode is intentionally
 The project is pinned to Expo SDK 54 because that is the runtime supported by the current iPhone App Store build of Expo Go. After pulling dependency changes, stop any old Metro process and clear its cached SDK 57 manifest:
 
 ```bash
-npm install
+npm ci
 npm start -- --clear
 ```
 
-Scan the newly generated QR code from Expo Go. Do not reuse a QR code or terminal process that was started before the SDK change.
+`npm ci` is intentional here: it removes stale SDK 57 native-module copies before installing the pinned SDK 54 tree. Force-close Expo Go, then scan the newly generated QR code. Do not reuse a QR code or terminal process that was started before the SDK change.
 
 ## Demo identity
 
